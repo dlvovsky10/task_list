@@ -1,0 +1,23 @@
+/* style.css */
+* {
+  margin: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+body {
+	background-color: powderblue;
+	font-family: Cursive;
+	color: darkblue;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-decoration: underline 1px;
+	text-underline-offset: 4px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
