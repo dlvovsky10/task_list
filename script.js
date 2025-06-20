@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function(){
     init();
 
     function init() {
+		loadTasksFromLocalStorage();
         setupEventListeners();
         renderTasks();
     }
@@ -40,12 +41,14 @@ document.addEventListener('DOMContentLoaded', function(){
         
         tasks.push(newTask);
         taskInput.value = '';
+		saveTasksToLocalStorage();
         renderTasks();
         taskInput.focus();
     }
 
     function deleteTask(taskId) {
         tasks = tasks.filter(task => task.id !== taskId);
+		saveTasksToLocalStorage();
         renderTasks();
     }
 
@@ -60,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
             const bullet = document.createElement('span');
             bullet.className = 'task-bullet';
-            bullet.textContent = '• ';
+			bullet.textContent = '🗑️';
+			// bullet.textContent = '🗑';
             bullet.title = 'Click to delete this task';
 
             const taskText = document.createElement('span');
@@ -76,5 +80,16 @@ document.addEventListener('DOMContentLoaded', function(){
             listItem.appendChild(taskText);
             taskList.appendChild(listItem);
         });
+    }
+	
+	function saveTasksToLocalStorage() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+	
+	function loadTasksFromLocalStorage() {
+        const storedTasks = localStorage.getItem('tasks');
+        if (storedTasks) {
+            tasks = JSON.parse(storedTasks);
+        }
     }
 });
